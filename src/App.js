@@ -1,11 +1,11 @@
-
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 import Main from './layout/Main';
 import Friends from './components/Friends/Friends';
-// import Header from './components/Header/Header';
+import FriendDetails from './components/FriendDetails/FriendDetails';
+
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +31,13 @@ function App() {
             return fetch('https://jsonplaceholder.typicode.com/users');
           },
           element: <Friends></Friends>
+        },
+        {
+          path:'/friend/:friendId',
+          loader:async({params}) =>{
+            return fetch(`https://jsonplaceholder.typicode.com/users/${params.friendId}`)
+          },
+          element:<FriendDetails></FriendDetails>
         }
       ]
     },
